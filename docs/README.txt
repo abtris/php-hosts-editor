@@ -28,3 +28,14 @@ The following is a sample VHOST you might want to consider for your project.
    </Directory>
     
 </VirtualHost>
+
+
+
+Configuration 
+
+[common]
+127.0.0.1 = "localhost"
+[devel]
+127.0.0.1 = "dbhost"
+[deploy]
+127.0.0.1 = "dbhost"
