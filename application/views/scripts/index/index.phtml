@@ -1,1 +1,20 @@
-<?php echo $this->form; ?>
+<style type="text/css">
+input { font-family: monospace; }
+</style>
+<h1>Hosts editor</h1>
+<form method="post">
+<?php 
+foreach ($this->ini as $name => $section) {
+	echo "<h2>$name</h2>\n";
+	echo "<dl>\n";
+	$row =1;
+	foreach ($section as $ip => $value) {
+		echo "<dt><input name='{$name}[{$row}][ip]' value='$ip' /></dt>\n";
+    	echo "<dd><input name='{$name}[{$row}][value]' value='$value'  size='140' /></dd>\n";
+		$row++;
+	}
+	echo "</dl>\n";
+}
+?>
+<input type="submit" value="Generate hosts file"/>
+</form>

@@ -11,21 +11,20 @@ class IndexController extends Zend_Controller_Action
     public function indexAction()
     {
         // parse hosts file
-        $hostsFile = file_get_contents('/etc/hosts');
-        $lines = explode("\n", $hostsFile);
-        echo "<pre>";
-        $out = array();
-        foreach ($lines as $line) {
-//            echo $line."\n";
-            preg_match('/^(#?\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b)\s(.*)/', $line, $matches);            
-            if (!empty($matches[1])) {
-                $out[$matches[1]] = trim($matches[2]);
-            }
+        $filename = APPLICATION_PATH . '/configs/hosts.ini';
+        $iniFile  =  parse_ini_file($filename, true);
+        if ($iniFile) {
+            $this->view->ini = $iniFile;
+        } else {
+            echo "Parse ini file $filename failed";            
         }
         
-        print_r($out);
-        
-    }
+     if ($this->getRequest()->isPost()) {
+            $formData = $this->getRequest()->getPost();
+         
+            Zend_Debug::dump($formData);
+     }
+    }     
 
 
 }
